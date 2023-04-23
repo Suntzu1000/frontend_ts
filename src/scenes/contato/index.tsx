@@ -69,7 +69,87 @@ const Contato = ({ setSelectedPage }: Props) => {
               onSubmit={onSubmit}
               action="https://formsubmit.co/gabrielfootze@gmail.com"
               method="POST"
-            ></form>
+            >
+              <input
+                className={inputStyles}
+                type="text"
+                placeholder="NOME"
+                {...register("name", {
+                  required: true,
+                  maxLength: 100,
+                })}
+              />
+              {errors.name && (
+                <p className="mt-1 text-primary-500">
+                  {errors.name.type === "required" &&
+                    "Este campo é obrigatório!"}
+                  {errors.name.type === "maxLength" &&
+                    "O máximo são 100 caracteres."}
+                </p>
+              )}
+
+              <input
+                className={inputStyles}
+                type="text"
+                placeholder="EMAIL"
+                {...register("email", {
+                  required: true,
+                  pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                })}
+              />
+              {errors.email && (
+                <p className="mt-1 text-primary-500">
+                  {errors.email.type === "required" &&
+                    "Este campo é obrigatório!"}
+                  {errors.email.type === "pattern" && "Email Inválido."}
+                </p>
+              )}
+
+              <textarea
+                className={inputStyles}
+                rows={4}
+                cols={50}
+                placeholder="MESSAGE"
+                {...register("message", {
+                  required: true,
+                  maxLength: 2000,
+                })}
+              />
+              {errors.message && (
+                <p className="mt-1 text-primary-500">
+                  {errors.message.type === "required" &&
+                    "Este campo é obrigatório!"}
+                  {errors.message.type === "pattern" && "Email Inválido."}
+                </p>
+              )}
+
+              <button
+                type="submit"
+                className="mt-5 rounded-lg bg-secondary-500 px-20 py-3 transition duration-500 hover:text-white"
+              >
+                ENVIAR
+              </button>
+            </form>
+          </motion.div>
+
+          <motion.div
+            className="relative mt-16 basis-2/5 md:mt-0"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.5 }}
+            transition={{ delay: 0.2, duration: 0.5 }}
+            variants={{
+              hidden: { opacity: 0, y: 50 },
+              visible: { opacity: 1, y: 0 },
+            }}
+          >
+            <div className="w-full before:absolute before:-bottom-20 before:-right-10 before:z-[-1] md:before:content-evolvetext">
+              <img
+                className="w-full"
+                src={ContactUsPageGraphic}
+                alt="Formulário"
+              />
+            </div>
           </motion.div>
         </div>
       </motion.div>
