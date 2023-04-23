@@ -33,7 +33,7 @@ const Benefit = ({ icon, title, description, setSelectedPage }: Props) => {
         onClick={() => setSelectedPage(SelectedPage.Contato)}
         href={`#${SelectedPage.Contato}`}
       >
-        <p>Learn More</p>
+        <p>Mais</p>
       </AnchorLink>
     </motion.div>
   );

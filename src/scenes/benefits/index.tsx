@@ -7,6 +7,8 @@ import { motion } from "framer-motion";
 import { BenefitType, SelectedPage } from "@/shared/types";
 import HText from "@/shared/Htext";
 import Benefit from "./Benefits";
+import BenefitsPageGraphic from "@/assets/BenefitsPageGraphic.png"
+import ActionButton from "@/shared/ActionButton";
 
 const beneficios: Array<BenefitType> = [
   {
@@ -55,10 +57,7 @@ const Benefits = ({ setSelectedPage }: Props) => {
             visible: { opacity: 1, x: 0 },
           }}
         >
-          <HText>
-            Arrase com o seu guarda-roupa: Descubra as últimas tendências em
-            nosso Ecommerce!
-          </HText>
+          <HText>Descubra as últimas tendências em nosso Ecommerce!</HText>
           <p className="my-5 text-sm">
             Entre na moda e encontre tudo o que você precisa para renovar seu
             estilo em nosso Ecommerce! De roupas a acessórios, temos as últimas
@@ -84,6 +83,65 @@ const Benefits = ({ setSelectedPage }: Props) => {
             />
           ))}
         </motion.div>
+
+        <div className="mt-16 items-center justify-between gap-20 md:mt-28 md:flex">
+          <img  className="mx-auto" src={BenefitsPageGraphic} alt="Benefícios" />
+
+          <div>
+            <div className="relative">
+              <div className="before:absolute before:-left-20 before:-top-20 before:z-[1] before:content-abstractwaves">
+                <motion.div
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true, amount: 0.5 }}
+                  transition={{ duration: 0.5 }}
+                  variants={{
+                    hidden: { opacity: 0, x: 50 },
+                    visible: { opacity: 1, x: 0 },
+                  }}
+                >
+                  <HText>
+                    Transforme sua vida com nossos{""}{" "}
+                    <span className="text-primary-500">Produtos</span>{" "}
+                  </HText>
+                </motion.div>
+              </div>
+            </div>
+
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.5 }}
+              transition={{ delay: 0.2, duration: 0.5 }}
+              variants={{
+                hidden: { opacity: 0, x: 50 },
+                visible: { opacity: 1, x: 0 },
+              }}
+            >
+              <p className="my-5">
+                Em nosso E-commerce, oferecemos uma grande variedade de produtos
+                para atender às diversas necessidades e preferências de nossos
+                clientes. Temos desde produtos eletrônicos, como smartphones,
+                tablets e laptops, até produtos de beleza, moda e decoração.
+              </p>
+              <p className="mb-5">
+                oferecemos produtos para saúde e bem-estar, como suplementos
+                alimentares, equipamentos de ginástica e produtos naturais. Além
+                disso, temos uma ampla gama de produtos para casa e jardim,
+                incluindo móveis, utensílios domésticos, ferramentas de
+                jardinagem e muito mais.
+              </p>
+            </motion.div>
+
+            <div className="relative mt-16">
+              <div className="before:absolute before:-bottom-20 before:right-40 before:z-[-1] before:content-sparkles">
+                <ActionButton setSelectedPage={setSelectedPage}>
+                  Produtos
+                </ActionButton>
+              </div>
+            </div>
+          </div>
+        </div>
       </motion.div>
     </section>
   );
