@@ -34,7 +34,7 @@ function App() {
       <Home setSelectedPage={setSelectedPage} />
       <Benefits setSelectedPage={setSelectedPage} />
       <Contato setSelectedPage={setSelectedPage}/>
-      <Footer setSelectedPage={setSelectedPage} />
+      <Footer  />
     </div>
   );
 }
