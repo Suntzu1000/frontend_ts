@@ -26,14 +26,14 @@ const Navbar = ({ isTopOfPage, selectedPage, setSelectedPage }: Props) => {
       >
         <div className={`${flexBetween} mx-auto w-5/6`}>
           <div className={`${flexBetween} w-full gap-16 `}>
-            <AnchorLink href="#paginainicial">
+            <AnchorLink href="#início">
               <img src={Logo} alt="Logo" />
             </AnchorLink>
             {isAboveMediumScreens ? (
               <div className={`${flexBetween} w-full  `}>
                 <div className={`${flexBetween} gap-8 text-sm `}>
                   <Link
-                    page="Página Inicial"
+                    page="Produtos"
                     selectedPage={selectedPage}
                     setSelectedPage={setSelectedPage}
                   />
@@ -43,7 +43,7 @@ const Navbar = ({ isTopOfPage, selectedPage, setSelectedPage }: Props) => {
                     setSelectedPage={setSelectedPage}
                   />
                   <Link
-                    page="Produtos"
+                    page="Acessar"
                     selectedPage={selectedPage}
                     setSelectedPage={setSelectedPage}
                   />
@@ -86,7 +86,7 @@ const Navbar = ({ isTopOfPage, selectedPage, setSelectedPage }: Props) => {
 
           <div className="ml-[33%] flex flex-col gap-10 text-2xl ">
             <Link
-              page="Página Inicial"
+              page="Inicial"
               selectedPage={selectedPage}
               setSelectedPage={setSelectedPage}
             />

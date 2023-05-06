@@ -1,8 +1,8 @@
 export enum SelectedPage{
-    PaginaInicial = "paginainicial",
+    PaginaInicial = "inicial",
     Sobre = "sobre",
     Produtos = "produtos",
-    Benefícios = "beneficios",
+    Benefícios = "benefícios",
     Contato = "contato"
   }
 
@@ -17,3 +17,19 @@ export enum SelectedPage{
     description?: string;
     image: string;
   }
+
+ export const product = [
+    {
+      image: "https://via.placeholder.com/150",
+      name: "Produto 1",
+      price: 99.99,
+      category: "Categoria 1",
+    },
+    {
+      image: "https://via.placeholder.com/150",
+      name: "Produto 2",
+      price: 49.99,
+      category: "Categoria 2",
+    },
+    // ...more products
+  ];
