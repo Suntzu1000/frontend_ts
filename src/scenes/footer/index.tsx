@@ -1,4 +1,4 @@
-import Logo from "@/assets/Logoooo.png";
+import Logo from "@/assets/Logo.png";
 import AnchorLink from "react-anchor-link-smooth-scroll";
 import {AiFillGithub} from "react-icons/ai";
 

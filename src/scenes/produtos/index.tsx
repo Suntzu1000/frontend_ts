@@ -1,84 +1,78 @@
-import React, { useState, useEffect, useRef } from "react";
-import { AiOutlineVerticalRight, AiOutlineVerticalLeft } from "react-icons/ai";
+import React, { useState } from 'react';
+import { BsChevronCompactLeft, BsChevronCompactRight } from 'react-icons/bs';
+import { RxDotFilled } from 'react-icons/rx';
+import laptop from "../../assets/ContactUsPageGraphic.png"
 
-const featuredProducts = [
-  "../assets/Logo.png",
-  "../assets/Logo.png",
-  "../assets/Logo.png",
-];
-
-let count = 0;
-let slideInterval: NodeJS.Timeout;
-
-
-interface ISliderState {
-  currentIndex: number;
+interface Slide {
+  url: string;
 }
 
-export default function Slider(): JSX.Element {
-  const [state, setState] = useState<ISliderState>({ currentIndex: 0 });
+function Produtos() {
+  const slides: Slide[] = [
+    {
+      url: 'https://images.unsplash.com/photo-1531297484001-80022131f5a1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2620&q=80',
+    },
+    {
+      url: 'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2670&q=80',
+    },
+    {
+      url: 'https://images.unsplash.com/photo-1661961112951-f2bfd1f253ce?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2672&q=80',
+    },
+    {
+      url: 'https://images.unsplash.com/photo-1512756290469-ec264b7fbf87?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2253&q=80',
+    },
+    {
+      url: 'https://images.unsplash.com/photo-1496181133206-80ce9b88a853?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2671&q=80',
+    },
+  ];
 
-  const slideRef = useRef<HTMLDivElement>(null);
+  const [currentIndex, setCurrentIndex] = useState<number>(0);
 
-  const removeAnimation = () => {
-    slideRef.current!.classList.remove("fade-anim");
+  const prevSlide = () => {
+    const isFirstSlide = currentIndex === 0;
+    const newIndex = isFirstSlide ? slides.length - 1 : currentIndex - 1;
+    setCurrentIndex(newIndex);
   };
 
-  useEffect(() => {
-    slideRef.current!.addEventListener("animationend", removeAnimation);
-    slideRef.current!.addEventListener("mouseenter", pauseSlider);
-    slideRef.current!.addEventListener("mouseleave", startSlider);
-
-    startSlider();
-    return () => {
-      pauseSlider();
-    };
-    // eslint-disable-next-line
-  }, []);
-
-  const startSlider = () => {
-    slideInterval = setInterval(() => {
-      handleOnNextClick();
-    }, 3000);
+  const nextSlide = () => {
+    const isLastSlide = currentIndex === slides.length - 1;
+    const newIndex = isLastSlide ? 0 : currentIndex + 1;
+    setCurrentIndex(newIndex);
   };
 
-  const pauseSlider = () => {
-    clearInterval(slideInterval);
-  };
-
-  const handleOnNextClick = () => {
-    count = (count + 1) % featuredProducts.length;
-    setState({ currentIndex: count });
-    slideRef.current!.classList.add("fade-anim");
-  };
-
-  const handleOnPrevClick = () => {
-    const productsLength = featuredProducts.length;
-    count = (state.currentIndex + productsLength - 1) % productsLength;
-    setState({ currentIndex: count });
-    slideRef.current!.classList.add("fade-anim");
+  const goToSlide = (slideIndex: number) => {
+    setCurrentIndex(slideIndex);
   };
 
   return (
-    <div id="produtos" ref={slideRef} className="w-full select-none relative gap-16 bg-gray-20 py-10 md:h-full md:pb-0">
-      <div className="aspect-w-16 aspect-h-9">
-        <img src={featuredProducts[state.currentIndex]} alt="" />
+    <div className='max-w-[1400px] h-[780px] w-full m-auto py-32 px-8 relative group'>
+      <div
+        style={{ backgroundImage: `url(${slides[currentIndex].url})` }}
+        className='w-full h-full rounded-2xl bg-center bg-cover duration-500'
+      ></div>
+      {/* Left Arrow */}
+      <div className='hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-[-50%] left-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer'>
+        <BsChevronCompactLeft onClick={prevSlide} size={30} />
       </div>
-
-      <div className="absolute w-full top-1/2 transform -translate-y-1/2 px-3 flex justify-between items-center">
-        <button
-          className="bg-black text-white p-1 rounded-full bg-opacity-50 cursor-pointer hover:bg-opacity-100 transition"
-          onClick={handleOnPrevClick}
-        >
-          <AiOutlineVerticalRight size={30} />
-        </button>
-        <button
-          className="bg-black text-white p-1 rounded-full bg-opacity-50 cursor-pointer hover:bg-opacity-100 transition"
-          onClick={handleOnNextClick}
-        >
-          <AiOutlineVerticalLeft size={30} />
-        </button>
+      {/* Right Arrow */}
+      <div className='hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-[-50%] right-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer'>
+        <BsChevronCompactRight onClick={nextSlide} size={30} />
+      </div>
+      <div className='flex top-4 justify-center py-2'>
+        {slides.map((slide, slideIndex) => (
+          <div
+            key={slideIndex}
+            onClick={() => goToSlide(slideIndex)}
+            className='text-2xl cursor-pointer'
+          >
+            <RxDotFilled />
+          </div>
+        ))}
       </div>
     </div>
   );
 }
+
+export default Produtos;
+
+
